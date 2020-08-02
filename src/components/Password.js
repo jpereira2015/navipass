@@ -4,7 +4,7 @@ export default class Password extends Component {
   render() {
     return (
       <div>
-        <h1>Resultado de Password</h1>
+        <h1>Resultado de Passwordss</h1>
       </div>
     );
   }

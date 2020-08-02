@@ -1,26 +1,32 @@
 // Core
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+//const renderLoader = () => <p>Loading</p>;
 // Estilos
 import './index.css';
+
 // Componentes
-import Home from './pages/Home';
-import Password from './pages/Password';
+import Home from './components/Home';
+import Password from './components/Password';
+import Navbar from './layouts/Navbar';
+
 // PWA
 import * as serviceWorker from './serviceWorker';
 
-
 ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path="/" component={Home}></Route>
-    <Route path="/new" component={Home}></Route>
-    <Route path="/password" component={Password}></Route>
-  </Router>,
+  <div>
+    <Suspense>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/password" component={Password} />
+        </Switch>
+      </Router>
+    </Suspense>
+  </div>,
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
